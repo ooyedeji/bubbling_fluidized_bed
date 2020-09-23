@@ -1,0 +1,5 @@
+*restart
+*log.liggghts
+**/post/*.vtk
+**/post/*.stl
+**/post/*.txt
