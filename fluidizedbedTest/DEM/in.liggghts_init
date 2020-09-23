@@ -16,7 +16,6 @@ create_box      2 reg
 neighbor        0.0001 bin
 neigh_modify    delay 0
 
-
 # Material properties required for granular pair styles (Two atom types)
 fix         m1 all property/global youngsModulus peratomtype 5e6 5e6
 fix         m2 all property/global poissonsRatio peratomtype 0.3 0.3
@@ -54,17 +53,16 @@ fix  fbOut all mesh/surface file STL/fluidizedbedOut.stl type 1 scale 0.0254
 #fix  fbOut all mesh/surface file STL/fluidizedbedOut.stl type 3 scale 0.0254
 
 #use the imported mesh as granular wall
-
 fix	walls all wall/gran model hertz tangential history mesh n_meshes 5 meshes fb1 fb2 fbBioin fbGasin fbOut  
 
 # particle distributions and insertion ### insert sand ###
-region      bc cylinder z 0.0 0.0 0.0235 0.25 0.254 units box
-fix         pts1 all particletemplate/sphere 15485863 atom_type 1 density constant 2670.7 radius constant 0.00025
-fix         pdd1 all particledistribution/discrete 15485867 1 pts1 1.0
-fix         ins all insert/rate/region seed 32452843 distributiontemplate pdd1 mass 0.02 massrate 0.01 insert_every 1000 overlapcheck yes vel constant 0. 0. -0.1 region bc ntry_mc 10000
+region          bc cylinder z 0.0 0.0 0.024 0.0 0.3 units box
+fix             pts1 all particletemplate/sphere 15485863 atom_type 1 density constant 2670.7 radius constant 0.00025
+fix             pdd1 all particledistribution/discrete 15485867 1 pts1 1.0
+fix             ins all insert/pack seed 32452843 distributiontemplate pdd1 vel constant 0. 0. -0.1 insert_every once overlapcheck yes all_in yes mass_in_region 0.02 region bc
 
 # apply nve integration to all particles that are inserted as single particles
-fix         integr all nve/sphere
+fix            integr all nve/sphere
 
 # screen output
 compute         rke all erotate/sphere
@@ -74,13 +72,12 @@ thermo_modify   lost ignore norm no
 compute_modify  thermo_temp dynamic yes
 
 # insert the first particles so that dump is not empty
-run         1
+run             1
+
 # Create imaging information
-dump	dumpstl all stl 5000 post/dump*.stl
-# dump        dmp all custom 2000 post/dump*.liggghts_init id type x y z ix iy iz vx vy vz fx fy fz omegax omegay omegaz radius 
-dump        dmp all custom/vtk 2000 post/dump*.liggghts_init.vtk id type x y z ix iy iz vx vy vz fx fy fz omegax omegay omegaz radius 
+dump            dumpstl all stl 100000 post/dump*.stl
+dump            dmp all custom/vtk 2000 post/particles_init.*.vtk id type x y z ix iy iz vx vy vz fx fy fz omegax omegay omegaz diameter 
 
-
-run         350000 upto
+run             100000 upto
 
 write_restart   post/restart/liggghts.restart
