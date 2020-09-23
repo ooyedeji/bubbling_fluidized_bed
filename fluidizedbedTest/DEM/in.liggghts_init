@@ -8,6 +8,7 @@ boundary        f f f
 newton          off
 
 units           si
+processors      2 2 1
 
 region          reg block -0.05 0.05 -0.05 0.05 -0.01 0.5 units box
 create_box      2 reg
@@ -72,10 +73,11 @@ thermo_modify   lost ignore norm no
 compute_modify  thermo_temp dynamic yes
 
 # insert the first particles so that dump is not empty
+dump            dumpstl all stl 2000 post/reactor.*.stl
 run             1
+undump          dumpstl
 
-# Create imaging information
-dump            dumpstl all stl 100000 post/dump*.stl
+# Create imaging information for particles
 dump            dmp all custom/vtk 2000 post/particles_init.*.vtk id type x y z ix iy iz vx vy vz fx fy fz omegax omegay omegaz diameter 
 
 run             100000 upto
