@@ -89,6 +89,6 @@ thermo          100
 thermo_modify   lost ignore norm no
 compute_modify  thermo_temp dynamic yes
 
-dump        dmp all custom/vtk 50000 post/particles_run.*.vtk id type x y z vx vy vz fx fy fz f_dragforce[1] f_dragforce[2] f_dragforce[3] diameter 
+dump        dmp all custom/vtk 50000 ../DEM/post/particles_run.*.vtk id type x y z vx vy vz fx fy fz f_dragforce[1] f_dragforce[2] f_dragforce[3] diameter 
 
 run 0
