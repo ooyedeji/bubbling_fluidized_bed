@@ -3,3 +3,10 @@
 **/post/*.vtk
 **/post/*.stl
 **/post/*.txt
+**/polymesh
+*cellLevel
+*pointLevel
+*_backup
+**/processor*
+**/log*
+**/postprocessing
