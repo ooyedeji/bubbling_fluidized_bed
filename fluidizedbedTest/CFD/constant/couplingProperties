@@ -5,13 +5,20 @@
 |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
+
+
 FoamFile
 {
-    version     2.0;
-    format      ascii;
-    class       uniformDimensionedVectorField;
-    location    "constant";
-    object      couplingProperties;
+    version         2.0;
+    format          ascii;
+
+    root            "";
+    case            "";
+    instance        "";
+    local           "";
+
+    class           dictionary;
+    object          liggghtsCommands;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -42,10 +49,10 @@ smoothingModel off;// localPSizeDiffSmoothing;// constDiffSmoothing; //
 
 forceModels
 (
-    GidaspowDrag
+    //GidaspowDrag
     //BeetstraDrag
     //DiFeliceDrag
-    //KochHillDrag
+    KochHillDrag
     gradPForce
     viscForce
     //fieldStore
