@@ -20,45 +20,36 @@ internalField   uniform (0 0 0);
 
 boundaryField
 {
-
-    //wall
-	CAD_patch1
-    {
-        type            slip;
-    }
-	CAD_patch3
-    {
-
-        type            slip;
-    }
-	fbBioin
-    {
-        //type            fixedValue;
-        //value           uniform (0 0 0);
-        type            slip;
-    }
-
     fbOut
     {
-
         type            zeroGradient;
     }
-	
+
+    CAD_patch1
+    {
+        type            slip;
+    }
+
+    CAD_patch3
+    {
+        type            slip;
+    }
+
+    fbBioin
+    {
+        type            slip;
+    }
+
     fbGasin
     {
-
-
-        //type            fixedValue;
-       // value           uniform (0 0 0.4208); Umf
-
-	type            uniformFixedValue;        
-	uniformValue     table
+        type            uniformFixedValue;
+        uniformValue    table
         (
             (0.000 (0 0 0.05))
             (2.000 (0 0 0.05))
             (2.100 (0 0 0.10))
             (4.100 (0 0 0.10))
-	    (4.200 (0 0 0.15))
+            (4.200 (0 0 0.15))
             (6.200 (0 0 0.15))
             (6.300 (0 0 0.20))
             (8.300 (0 0 0.20))
@@ -167,8 +158,8 @@ boundaryField
             (115.500 (0 0 2.80))
             (117.500 (0 0 2.80))
             (117.600 (0 0 2.85))
-            (119.600 (0 0 2.85))            
-	    (119.700 (0 0 2.90))
+            (119.600 (0 0 2.85))
+            (119.700 (0 0 2.90))
             (121.700 (0 0 2.90))
             (122.800 (0 0 2.95))
             (124.800 (0 0 2.95))
@@ -207,8 +198,8 @@ boundaryField
             (158.500 (0 0 3.80))
             (160.500 (0 0 3.80))
             (160.600 (0 0 3.85))
-            (162.600 (0 0 3.85))            
-	    (162.700 (0 0 3.90))
+            (162.600 (0 0 3.85))
+            (162.700 (0 0 3.90))
             (164.700 (0 0 3.90))
             (164.800 (0 0 3.95))
             (166.800 (0 0 3.95))
@@ -374,37 +365,9 @@ boundaryField
             (334.800 (0 0 7.95))
             (334.900 (0 0 8.00))
             (336.900 (0 0 8.00))
-	);
-
-        /*type            flowRateInletVelocity;
-        flowRate        0.001;
-        value           uniform (0 0 0);*/
-
-/*        type            groovyBC;
-        variables       "Uend=vector(0,0,0.02);tEnd=0.1;";
-        valueExpression "((time() < tEnd) ? Uend/tEnd*time():Uend)";
-        value           uniform (0 0 0);*/
-
-        // 2.0.x, 1.6,ext
-        /*type            timeVaryingUniformFixedValue;
-        fileName        "steps_0p1s";
-        outOfBounds     clamp;
-        value           uniform (0 0 0);*/
-
-        // 2.1.x or higher
-       // type            uniformFixedValue;
-      //  uniformValue     table
-        (
-     //       (0.000 (0 0 0.002))
-      //      (0.100 (0 0 0.020))
-        //上述用于得到Umf的大小
-		//然后可用这个速度模拟持续一段时间，用此命令
-        //type            fixedValue;
-        //value           uniform (0 0 Umf);
-		);
+        );
     }
-
-
 }
+
 
 // ************************************************************************* //

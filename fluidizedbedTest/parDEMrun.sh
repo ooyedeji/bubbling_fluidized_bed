@@ -27,4 +27,3 @@ debugMode="off"
 
 #- call function to run DEM case
 parDEMrun $logpath $logfileName $casePath $headerText $solverName $nrProcs $machineFileName $debugMode
-
